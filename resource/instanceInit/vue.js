@@ -981,7 +981,7 @@
   }
 
   /**
-   * Attempt to create an observer instance for a value,
+   * Attempt to create an observer instanceInit for a value,
    * returns the new observer if successfully observed,
    * or the existing observer if the value already has one.
    */
@@ -1094,7 +1094,7 @@
     var ob = (target).__ob__;
     if (target._isVue || (ob && ob.vmCount)) {
        warn(
-        'Avoid adding reactive properties to a Vue instance or its root $data ' +
+        'Avoid adding reactive properties to a Vue instanceInit or its root $data ' +
         'at runtime - declare it upfront in the data option.'
       );
       return val
@@ -1124,7 +1124,7 @@
     var ob = (target).__ob__;
     if (target._isVue || (ob && ob.vmCount)) {
        warn(
-        'Avoid deleting properties on a Vue instance or its root $data ' +
+        'Avoid deleting properties on a Vue instanceInit or its root $data ' +
         '- just set it to null.'
       );
       return
@@ -1169,7 +1169,7 @@
     strats.el = strats.propsData = function (parent, child, vm, key) {
       if (!vm) {
         warn(
-          "option \"" + key + "\" can only be used during instance " +
+          "option \"" + key + "\" can only be used during instanceInit " +
           'creation with the `new` keyword.'
         );
       }
@@ -1236,7 +1236,7 @@
       }
     } else {
       return function mergedInstanceDataFn () {
-        // instance merge
+        // instanceInit merge
         var instanceData = typeof childVal === 'function'
           ? childVal.call(vm, vm)
           : childVal;
@@ -1261,7 +1261,7 @@
       if (childVal && typeof childVal !== 'function') {
          warn(
           'The "data" option should be a function ' +
-          'that returns a per-instance value in component ' +
+          'that returns a per-instanceInit value in component ' +
           'definitions.',
           vm
         );
@@ -1310,8 +1310,8 @@
   /**
    * Assets
    *
-   * When a vm is present (instance creation), we need to do
-   * a three-way merge between constructor options, instance
+   * When a vm is present (instanceInit creation), we need to do
+   * a three-way merge between constructor options, instanceInit
    * options and parent options.
    */
   function mergeAssets (
@@ -2045,7 +2045,7 @@
 
     var warnNonPresent = function (target, key) {
       warn(
-        "Property or method \"" + key + "\" is not defined on the instance but " +
+        "Property or method \"" + key + "\" is not defined on the instanceInit but " +
         'referenced during render. Make sure that this property is reactive, ' +
         'either in the data option, or for class-based components, by ' +
         'initializing the property. ' +
@@ -2057,7 +2057,7 @@
     var warnReservedPrefix = function (target, key) {
       warn(
         "Property \"" + key + "\" must be accessed with \"$data." + key + "\" because " +
-        'properties starting with "$" or "_" are not proxied in the Vue instance to ' +
+        'properties starting with "$" or "_" are not proxied in the Vue instanceInit to ' +
         'prevent conflicts with Vue internals. ' +
         'See: https://vuejs.org/v2/api/#data',
         target
@@ -2979,7 +2979,7 @@
     } else {
       // the context vm passed in is a functional context as well.
       // in this case we want to make sure we are able to get a hold to the
-      // real context instance.
+      // real context instanceInit.
       contextVm = parent;
       // $flow-disable-line
       parent = parent._original;
@@ -3487,7 +3487,7 @@
     var renderContext = parentVnode && parentVnode.context;
     vm.$slots = resolveSlots(options._renderChildren, renderContext);
     vm.$scopedSlots = emptyObject;
-    // bind the createElement fn to this instance
+    // bind the createElement fn to this instanceInit
     // so that we get proper render context inside it.
     // args order: tag, data, children, normalizationType, alwaysNormalize
     // internal version is used by render functions compiled from templates
@@ -3759,7 +3759,7 @@
   function initEvents (vm) {
     vm._events = Object.create(null);
     vm._hasHookEvent = false;
-    // init parent attached events
+    // instanceInit parent attached events
     var listeners = vm.$options._parentListeners;
     if (listeners) {
       updateComponentListeners(vm, listeners);
@@ -3998,7 +3998,7 @@
       vm.__patch__(vm._vnode, null);
       // fire destroyed hook
       callHook(vm, 'destroyed');
-      // turn off all instance listeners.
+      // turn off all instanceInit listeners.
       vm.$off();
       // remove __vue__ reference
       if (vm.$el) {
@@ -4076,7 +4076,7 @@
     }, true /* isRenderWatcher */);
     hydrating = false;
 
-    // manually mounted instance, call mounted on self
+    // manually mounted instanceInit, call mounted on self
     // mounted is called for render-created child components in its inserted hook
     if (vm.$vnode == null) {
       vm._isMounted = true;
@@ -4652,7 +4652,7 @@
     // instead of dynamic object key enumeration.
     var keys = vm.$options._propKeys = [];
     var isRoot = !vm.$parent;
-    // root instance props should be converted
+    // root instanceInit props should be converted
     if (!isRoot) {
       toggleObserving(false);
     }
@@ -4706,7 +4706,7 @@
         vm
       );
     }
-    // proxy data on instance
+    // proxy data on instanceInit
     var keys = Object.keys(data);
     var props = vm.$options.props;
     var methods = vm.$options.methods;
@@ -4862,7 +4862,7 @@
         }
         if ((key in vm) && isReserved(key)) {
           warn(
-            "Method \"" + key + "\" conflicts with an existing Vue instance method. " +
+            "Method \"" + key + "\" conflicts with an existing Vue instanceInit method. " +
             "Avoid defining component methods that start with _ or $."
           );
         }
@@ -4911,7 +4911,7 @@
     {
       dataDef.set = function () {
         warn(
-          'Avoid replacing instance root $data. ' +
+          'Avoid replacing instanceInit root $data. ' +
           'Use nested data properties instead.',
           this
         );
@@ -5118,7 +5118,7 @@
 
   function initExtend (Vue) {
     /**
-     * Each instance constructor, including Vue, has a unique
+     * Each instanceInit constructor, including Vue, has a unique
      * cid. This enables us to create wrapped "child
      * constructors" for prototypal inheritance and cache them.
      */
@@ -5156,7 +5156,7 @@
 
       // For props and computed properties, we define the proxy getters on
       // the Vue instances at extension time, on the extended prototype. This
-      // avoids Object.defineProperty calls for each instance created.
+      // avoids Object.defineProperty calls for each instanceInit created.
       if (Sub.options.props) {
         initProps$1(Sub);
       }
@@ -5413,7 +5413,7 @@
     });
 
     // this is used to identify the "base" constructor to extend all plain-object
-    // components with in Weex's multi-instance scenarios.
+    // components with in Weex's multi-instanceInit scenarios.
     Vue.options._base = Vue;
 
     extend(Vue.options.components, builtInComponents);
@@ -5972,8 +5972,8 @@
         if (isDef(i = i.hook) && isDef(i = i.init)) {
           i(vnode, false /* hydrating */);
         }
-        // after calling the init hook, if the vnode is a child component
-        // it should've created a child instance and mounted it. the child
+        // after calling the instanceInit hook, if the vnode is a child component
+        // it should've created a child instanceInit and mounted it. the child
         // component also has set the placeholder vnode's elm.
         // in that case we can just return the element and be done.
         if (isDef(vnode.componentInstance)) {
@@ -6086,7 +6086,7 @@
           ancestor = ancestor.parent;
         }
       }
-      // for slot content they should also get the scopeId from the host instance.
+      // for slot content they should also get the scopeId from the host instanceInit.
       if (isDef(i = activeInstance) &&
         i !== vnode.context &&
         i !== vnode.fnContext &&
@@ -8791,7 +8791,7 @@
       }
 
       // ensure a key that is unique to the vnode type and to this transition
-      // component instance. This key will be used to remove pending leaving nodes
+      // component instanceInit. This key will be used to remove pending leaving nodes
       // during entering.
       var id = "__transition-" + (this._uid) + "-";
       child.key = child.key == null
