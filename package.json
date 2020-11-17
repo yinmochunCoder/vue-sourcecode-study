@@ -1,0 +1,30 @@
+{
+  "name": "vue-sourcecode-study",
+  "version": "1.0.0",
+  "description": "'手写vue源码'",
+  "main": "rollup.config.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "build:dev": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yinmochunCoder/vue-sourcecode-study.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yinmochunCoder/vue-sourcecode-study/issues"
+  },
+  "homepage": "https://github.com/yinmochunCoder/vue-sourcecode-study#readme",
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "cross-env": "^7.0.2",
+    "rollup": "^2.33.2",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-serve": "^1.1.0"
+  }
+}
