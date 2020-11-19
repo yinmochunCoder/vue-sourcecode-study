@@ -8,23 +8,38 @@
 </head>
 <body>
     <div id="app">
-        <p>{{ name }}</p>
     </div>
     <script type="text/javascript" src="../../dist/umd/vue.js"></script>
     <script type="text/javascript">
         var vm = new Vue({
             el: '#app',
-            // data: {
-            //     name: 1111
-            // },
             data() {
                 return {
-                    name: '1111'
+                    name: 'vue实例初始化数据',
+                    description: ['初始化data、props、methods、lifecycle、computed',
+                        '向vue实例暴露属性，以$开始的变量，挂载属性到vue实例中']
+
+                }
+            },
+            methods: {
+                vueMethods() {
+                    console.log(this)
+                    console.log("依次将方法加入到对象实例中，并将this设置为当前vue实例")
+                    console.log(this.name,"data中的name属性")
+                }
+            },
+            computed: {
+                vueComputed() {
+                    return Date.now()
+                }
+            },
+            watch: {
+                name() {
+                    return "watch监控之后"
                 }
             }
         })
-        console.log(vm._data.name,"html中vm._data")
-        console.log(vm.$data.name,"html中vm.$data")
+        vm.vueMethods()
     </script>
 </body>
 </html>

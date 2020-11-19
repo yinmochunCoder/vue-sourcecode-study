@@ -9,6 +9,9 @@
 <body>
     <div id="app">
         <p>{{ name }}</p>
+        <p>{{ reName() }}</p>
+        <button @click="nameChange">点我</button>
+        <p>{{ watchName }}</p>
     </div>
     <!--<script type="text/javascript" src="../dist/umd/vue.js"></script>-->
     <script type="text/javascript" src="../resource/vue.js"></script>
@@ -16,8 +19,34 @@
         var vm = new Vue({
             el: '#app',
             data: {
-                name: 12
+                name: 'hello',
+                watchName: ''
+            },
+            computed: {
+                reName() {
+                    return this.name.split('').reverse().join('')
+                },
+                date() {
+                    return Date.now()
+                }
+            },
+            methods: {
+                reName() {
+                    return this.name.split('').reverse().join('')
+                },
+                nameChange() {
+                    this.name = '改变后'
+                },
+                watchFun() {
+                    this.watchName = '我改变了之后'
+                }
+            },
+            watch: {
+                name() {
+                    this.watchFun()
+                }
             }
+
         })
         console.log(vm)
     </script>
