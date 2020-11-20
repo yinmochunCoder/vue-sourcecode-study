@@ -22,6 +22,7 @@
                 name: 'hello',
                 watchName: ''
             },
+            props: ['title', 'likes', 'isPublished', 'commentIds', 'author'],
             computed: {
                 reName() {
                     return this.name.split('').reverse().join('')
