@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+    <title>vue源码学习-响应式系统</title>
+    <link rel="stylesheet" href="../common.css" type="text/css"/>
+</head>
+<body>
+    <div id="reactive">
+        <p></p>
+    </div>
+    <script type="text/javascript" src="../../dist/umd/vue.js"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            data: {
+                title: '字符串'
+            }
+        })
+        console.log(vm)
+    </script>
+</body>
+</html>

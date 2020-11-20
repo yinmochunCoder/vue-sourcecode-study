@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
-    <title>vue源码学习不使用vue-cli版本</title>
+    <title>vue源码学习-实例初始化</title>
     <link rel="stylesheet" href="../common.css" type="text/css"/>
 </head>
 <body>
@@ -40,6 +40,8 @@
             }
         })
         vm.vueMethods()
+        console.log(vm._data.name, "vm._data.name")
+        console.log(vm.$data.name, "vm.$data.name")
     </script>
 </body>
 </html>

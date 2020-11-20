@@ -1,3 +1,5 @@
+import { observe } from "../observe/index";
+
 /**
  * 初始化数据选项
  * @param vm
@@ -27,11 +29,13 @@ function initData(vm) {
     })
     var keys = Object.keys(data)
     keys.forEach(key => {
+        // 将属性添加到Vue原型上
         Object.defineProperty(Vue.prototype, key, {
             value: data[key]
         })
-
     })
+
+    // observe(data,true)
 }
 // 当data为函数返回的对象时,指定this到vm上，同时执行data函数
 function getData(data,vm) {
