@@ -13,20 +13,25 @@
     <script type="text/javascript">
         var vm = new Vue({
             el: '#app',
-            data() {
-                return {
-                    name: 'vue实例初始化数据',
-                    description: ['初始化data、props、methods、lifecycle、computed',
-                        '向vue实例暴露属性，以$开始的变量，挂载属性到vue实例中']
-
-                }
+            // data() {
+            //     return {
+            //         name: 'vue实例初始化数据',
+            //         description: ['初始化data、props、methods、lifecycle、computed',
+            //             '向vue实例暴露属性，以$开始的变量，挂载属性到vue实例中']
+            //
+            //     }
+            // },
+            data: {
+                name: '小李',
+                address: '家庭住址在哪里'
             },
             methods: {
-                vueMethods() {
-                    console.log(this)
-                    console.log("依次将方法加入到对象实例中，并将this设置为当前vue实例")
+                query() {
+                    console.log(this,"methods中的this")
                     console.log(this.name,"data中的name属性")
-                }
+                    return "1"
+                },
+                add() {}
             },
             computed: {
                 vueComputed() {
@@ -39,9 +44,7 @@
                 }
             }
         })
-        vm.vueMethods()
-        console.log(vm._data.name, "vm._data.name")
-        console.log(vm.$data.name, "vm.$data.name")
+        vm.query()
     </script>
 </body>
 </html>

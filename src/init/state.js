@@ -19,23 +19,21 @@ export function initState(vm) {
 function initData(vm) {
     let data = vm.$options.data
     // 将data赋值给vm的_data属性,data为方法返回的对象时，调用函数
-    // vm._data给实例对象暴露_data属性，vue原型上增加$data属性
+    // vm._data给实例对象暴露_data属性，vue原型上增加$data属性，便于用户访问数据
     data = vm._data = typeof data === 'function'
         ? getData(data,vm)
         : data || {}
-
+    // 给vue实例增加$data属性
     Object.defineProperty(Vue.prototype, "$data", {
         get() { return vm._data }
     })
-    var keys = Object.keys(data)
+    // 将data属性添加到vue实例中
+    let keys = Object.keys(data)
     keys.forEach(key => {
-        // 将属性添加到Vue原型上
-        Object.defineProperty(Vue.prototype, key, {
-            value: data[key]
-        })
+        vm[key] = data[key]
     })
 
-    // observe(data,true)
+    observe(data)
 }
 // 当data为函数返回的对象时,指定this到vm上，同时执行data函数
 function getData(data,vm) {
