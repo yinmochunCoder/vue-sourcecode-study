@@ -8,15 +8,19 @@ export function observe(data) {
     console.log(data,"observe中获得的data")
     // 非对象返回
     if (!isObject(data)) return
-    //创建ob实例
+    // 创建Observe实例
     var ob = new Observe(data)
-
-
 }
 
+// 函数方式的写法
 function Observe(value) {
     this.value = value
-    this.walk(value)
+    // 判断数据是否为数组
+    if (Array.isArray(value)) {
+
+    } else {
+        this.walk(value)
+    }
 }
 
 Observe.prototype.walk = function(obj) {
@@ -32,11 +36,12 @@ Observe.prototype.defineReactive = function(obj,key) {
     observe(val)
     Object.defineProperty(obj,key,{
         get() {
-            var value = val
-            return value
+            return val
         },
         set(newValue) {
             obj[key] = newValue
         }
     })
 }
+
+
