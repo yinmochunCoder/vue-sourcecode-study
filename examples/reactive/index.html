@@ -15,7 +15,11 @@
         var vm = new Vue({
             data: {
                 name: '小李',
-                address: '西安市雁塔区'
+                address: {
+                    road: '科技三路',
+                    area: '雁塔区',
+                    details: '龙城铭园'
+                }
             }
         })
         console.log(vm)
