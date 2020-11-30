@@ -27,11 +27,11 @@ function initData(vm) {
     Object.defineProperty(Vue.prototype, "$data", {
         get() { return vm._data }
     })
-    // 将data属性添加到vue实例中
-    let keys = Object.keys(data)
-    keys.forEach(key => {
-        vm[key] = data[key]
-    })
+    // todo 将data属性添加到vue实例中
+    // let keys = Object.keys(data)
+    // keys.forEach(key => {
+    //     vm[key] = data[key]
+    // })
 
     observe(data)
 }
