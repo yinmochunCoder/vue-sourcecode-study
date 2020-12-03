@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue代理</title>
+</head>
+<body>
+    <script type="text/javascript" src="../../dist/umd/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            data() {
+                return {
+                    name: '代理名称',
+                    address: {
+                        road: '科技三路',
+                        area: '雁塔区'
+                    }
+                }
+            }
+        })
+        console.log(vm,"vm")
+        console.log(vm._data.name,"vm使用_data访问")
+        console.log(vm.name,"vm使用代理方式访问")
+    </script>
+</body>
+
+</html>

@@ -27,13 +27,26 @@ function initData(vm) {
     Object.defineProperty(Vue.prototype, "$data", {
         get() { return vm._data }
     })
-    // todo 将data属性添加到vue实例中
-    // let keys = Object.keys(data)
-    // keys.forEach(key => {
-    //     vm[key] = data[key]
-    // })
-
+    // 将vue属性进行代理
+    let keys = Object.keys(data)
+    var i = keys.length
+    while(i--) {
+        let key = keys[i]
+        proxy(vm,'_data',key)
+    }
     observe(data)
+}
+
+// vue属性实现代理，方位vue._data.property = vue.property
+function proxy(target, sourcreKey, key) {
+    Object.defineProperty(target, key, {
+        get() {
+            return this[sourcreKey][key]
+        },
+        set(val) {
+            this[sourcreKey][key] = val
+        }
+    })
 }
 // 当data为函数返回的对象时,指定this到vm上，同时执行data函数
 function getData(data,vm) {

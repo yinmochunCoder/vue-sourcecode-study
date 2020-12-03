@@ -8,10 +8,11 @@
 </head>
 <body>
     <div id="app">
-        <!--<p>{{ name }}</p>-->
+        <p>{{ name }}</p>
         <!--<p>{{ reName() }}</p>-->
         <!--<button @click="nameChange">点我</button>-->
         <p>{{ zip }}</p>
+        <p>{{ address.ufo }}</p>
     </div>
     <!--<script type="text/javascript" src="../dist/umd/vue.js"></script>-->
     <script type="text/javascript" src="../resource/vue.js"></script>
@@ -20,8 +21,24 @@
             el: '#app',
             data: {
                 name: 'hello',
-                zip: ['720932','124312']
+                zip: ['720932','124312'],
+                address: { ufo: ''}
             },
+            // beforeCreate() {
+            //     console.log(this,"beforeCreate")
+            //     this.name = "beforeCreate name"
+            // },
+            // created() {
+            //     // created observe已生效,el还没被挂载，无法使用this.$el访问
+            //     this.name = "create name"
+            //     console.log(this.$el, "实例挂载前")
+            // },
+            // beforeMount() {
+            //     console.log(this.$el, "beforeMount实例挂载前")
+            // },
+            // mounted() {
+            //     console.log(this.$el, "实例已经挂载了")
+            // }
             // props: ['title', 'likes', 'isPublished', 'commentIds', 'author'],
             // computed: {
             //     reName() {
@@ -49,9 +66,13 @@
             // }
 
         })
+        vm.address.ufo = "ufo"
+        vm.$set(vm.address,"ufo",undefined)
+
         console.log(vm)
-        vm.zip.push('99999')
-        vm.zip.splice(1,0,'888888')
+        // console.log(vm)
+        // vm.zip.push('99999')
+        // vm.zip.splice(1,0,'888888')
     </script>
 </body>
 </html>
