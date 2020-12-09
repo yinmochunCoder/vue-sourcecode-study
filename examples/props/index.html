@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>props初始化</title>
+</head>
+<body>
+    <script type="text/javascript" src="../../dist/umd/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            data: {
+                name: 'vue父组件',
+            },
+            props: {
+                propA: Number,
+                propB: String
+            }
+        });
+        console.log(vm)
+    </script>
+</body>
+</html>

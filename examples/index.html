@@ -14,7 +14,6 @@
         <p>{{ zip }}</p>
         <p>{{ address.ufo }}</p>
     </div>
-    <!--<script type="text/javascript" src="../dist/umd/vue.js"></script>-->
     <script type="text/javascript" src="../resource/vue.js"></script>
     <script type="text/javascript">
         var vm = new Vue({
@@ -24,6 +23,7 @@
                 zip: ['720932','124312'],
                 address: { ufo: ''}
             },
+            props: ['childName','childZip']
             // beforeCreate() {
             //     console.log(this,"beforeCreate")
             //     this.name = "beforeCreate name"

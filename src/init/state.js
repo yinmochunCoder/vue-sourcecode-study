@@ -1,4 +1,4 @@
-import { observe } from "../observe/index";
+import { observe, Observe } from "../observe/index";
 
 /**
  * 初始化数据选项
@@ -9,7 +9,7 @@ export function initState(vm) {
     var options = vm.$options
    // 初始化选项属性
     if (options.data) initData(vm)
-    if (options.props) initProps(vm)
+    if (options.props) initProps(vm,options.props)
     if (options.methods) initMethods(vm,options.methods)
     if (options.watch) initWatch(vm,options.watch)
     if (options.computed) initComputed(vm,options.computed)
@@ -37,24 +37,31 @@ function initData(vm) {
     observe(data)
 }
 
-// vue属性实现代理，方位vue._data.property = vue.property
-function proxy(target, sourcreKey, key) {
-    Object.defineProperty(target, key, {
-        get() {
-            return this[sourcreKey][key]
-        },
-        set(val) {
-            this[sourcreKey][key] = val
-        }
-    })
-}
 // 当data为函数返回的对象时,指定this到vm上，同时执行data函数
 function getData(data,vm) {
     return data.call(vm, vm)
 }
 
-function initProps(vm) {
-
+function initProps(vm,propsOptions) {
+    // 暴露_props属性
+    var props = vm._props = {}
+    var loop = function(key) {
+        // 需要实例化class之后，才能调用class上的方法
+        var ob = new Observe()
+        // 将props属性添加到响应式系统里
+        ob.defineReactive(vm,key)
+        // 将属性增加到props下
+        Object.defineProperty(props,key,{
+            value: propsOptions[key]
+        })
+        // props属性进行代理
+        if (Object.keys(props).length !== 0) {
+            proxy(vm,"_props",key)
+        }
+    }
+    for (let key in propsOptions )
+        loop(key)
+    console.log(vm._prop, "vm._prop")
 }
 
 // 初始化方法，并挂载到vue实例
@@ -77,4 +84,16 @@ function initComputed(vm,computed) {
             value: computed[key]
         })
     }
+}
+
+// vue属性实现代理，方位vue._data.property = vue.property
+function proxy(target, sourcreKey, key) {
+    Object.defineProperty(target, key, {
+        get() {
+            return this[sourcreKey][key]
+        },
+        set(val) {
+            this[sourcreKey][key] = val
+        }
+    })
 }

@@ -33,7 +33,7 @@ function protoAugment(target,src) {
     target.__proto__ = src
 }
 // class的写法
-class Observe {
+export class Observe {
     constructor(value) {
         this.value = value
     }

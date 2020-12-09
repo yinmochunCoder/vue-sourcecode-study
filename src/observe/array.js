@@ -13,7 +13,6 @@ const methodsToPatch = [
 methodsToPatch.forEach(method => {
     // 函数劫持，首先获取原始方法
     var original = arrayMethods[method]
-    console.log(original,"original")
     Object.defineProperty(arrayMethods,method, {
         value: function mutator() {
             // 获取传入参数
