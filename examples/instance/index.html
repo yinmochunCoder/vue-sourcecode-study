@@ -13,31 +13,21 @@
     <script type="text/javascript">
         var vm = new Vue({
             el: '#app',
-            // data() {
-            //     return {
-            //         name: 'vue实例初始化数据',
-            //         description: ['初始化data、props、methods、lifecycle、computed',
-            //             '向vue实例暴露属性，以$开始的变量，挂载属性到vue实例中']
-            //
-            //     }
-            // },
             data: {
                 name: '小李',
                 address: '家庭住址在哪里'
             },
             methods: {
                 query() {
-                    console.log(this,"methods中的this")
-                    console.log(this.name,"data中的name属性")
                     return "1"
                 },
                 add() {}
             },
-            computed: {
-                vueComputed() {
-                    return Date.now()
-                }
-            },
+            // computed: {
+            //     vueComputed() {
+            //         return Date.now()
+            //     }
+            // },
             watch: {
                 name() {
                     return "watch监控之后"

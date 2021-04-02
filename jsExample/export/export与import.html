@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>导入与导出</title>
+</head>
+<body>
+<div></div>
+<!--<script src="exports.js"></script>-->
+<script type="module">
+    import {ExportAndImport} from "./exports.js";
+
+    let data = {
+        name: 'xiaoyanli',
+        age: '21',
+        school: {
+            sc: 'xgd',
+            address: '西安'
+        }
+    };
+    const ex = new ExportAndImport({data})
+    console.log(ex.data)
+    ex.data.school.address = 'lijian'
+    console.log(ex.data.school.address)
+    ex.data.school.address = 'xxxx'
+    console.log(ex.data.school.address)
+</script>
+</body>
+</html>

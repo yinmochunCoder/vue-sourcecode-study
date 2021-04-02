@@ -8,11 +8,13 @@
 </head>
 <body>
     <div id="app">
-        <p>{{ name }}</p>
-        <!--<p>{{ reName() }}</p>-->
-        <!--<button @click="nameChange">点我</button>-->
-        <p>{{ zip }}</p>
-        <p>{{ address.ufo }}</p>
+        <!--<p>{{ name }}</p>-->
+        <!--<p>{{ zip }}</p>-->
+        <!--<p>{{ address.ufo }}</p>-->
+        <!--<p>watch监测: {{ rename }}</p>-->
+        <ul v-for="item in List">
+            <li>{{item.name}},{{item.age}}</li>
+        </ul>
     </div>
     <script type="text/javascript" src="../resource/vue.js"></script>
     <script type="text/javascript">
@@ -21,9 +23,14 @@
             data: {
                 name: 'hello',
                 zip: ['720932','124312'],
-                address: { ufo: ''}
+                address: { ufo: ''},
+                rename: '',
+                List: [
+                    {name: 'lily', age: 12},
+                    {name: 'lucy', age: 22}
+                ]
             },
-            props: ['childName','childZip']
+            props: ['childName','childZip'],
             // beforeCreate() {
             //     console.log(this,"beforeCreate")
             //     this.name = "beforeCreate name"
@@ -59,16 +66,19 @@
             //         this.watchName = '我改变了之后'
             //     }
             // },
-            // watch: {
-            //     name() {
-            //         this.watchFun()
-            //     }
-            // }
+            // computed: {
+            //     rename() {}
+            // },·
+            watch: {
+                name() {
+                    this.rename = "观察之后"
+                }
+            }
 
         })
         vm.address.ufo = "ufo"
         vm.$set(vm.address,"ufo",undefined)
-
+        vm.name = "小李"
         console.log(vm)
         // console.log(vm)
         // vm.zip.push('99999')

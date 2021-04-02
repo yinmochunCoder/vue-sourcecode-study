@@ -49,15 +49,9 @@ function initProps(vm,propsOptions) {
         // 需要实例化class之后，才能调用class上的方法
         var ob = new Observe()
         // 将props属性添加到响应式系统里
-        ob.defineReactive(vm,key)
-        // 将属性增加到props下
-        Object.defineProperty(props,key,{
-            value: propsOptions[key]
-        })
+        ob.defineReactive(props,key)
         // props属性进行代理
-        if (Object.keys(props).length !== 0) {
-            proxy(vm,"_props",key)
-        }
+        proxy(vm,"_props",key)
     }
     for (let key in propsOptions )
         loop(key)
